@@ -14,12 +14,8 @@
         <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix."  format="h5" multiple="false" optional="false"/>
         <param type="data" name="metadata" label="Select the metadata file."  format="csv" multiple="false" optional="false"/> 
         <param type="text" name="genome" label="Select the respective genome." multiple="false" optional="false"/> 
-<<<<<<< HEAD
         <param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
-=======
-        <param type="data" name="fragment_file" label="Select the fragment file."  format="gz" multiple="false" optional="false"/>
         <param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
->>>>>>> 6938710e3787ef50530797a3afebcfa6676b3549
     </inputs>
     <outputs>
         <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>
