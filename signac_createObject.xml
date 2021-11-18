@@ -12,7 +12,7 @@
         <param type="data" name="fragment_file" label="Select the fragment file."  format="h5" multiple="false" optional="false"/> 
     </inputs>
     <outputs>
-        <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS">
+        <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>
     </outputs>
     <help><![CDATA[
         This tool runs the first step in the Signac pipeline, which is to read in the filtered peak BC matrix, the metadata and the fragment file and create a Seurat object.
