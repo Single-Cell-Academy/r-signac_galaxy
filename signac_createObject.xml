@@ -1,0 +1,29 @@
+<tool id="signac_createObject" name="Reads in output files from CellRanger-ATAC and creates a Seurat object containing a ChromatinAssay assay." version="0.1.0" python_template_version="3.5">
+    <macros>
+        <import>signac_macros.xml</import>
+    </macros>
+    <command detect_errors="exit_code"><![CDATA[
+        r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file $fragment_file
+    ]]></command>
+    <inputs>
+        <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix."  format="h5" multiple="false" optional="false"/>
+        <param type="data" name="metadata" label="Select the metadata file."  format="h5" multiple="false" optional="false"/> 
+        <param type="text" name="genome" label="Select the respective genome."  format="h5" multiple="false" optional="false"/> 
+        <param type="data" name="fragment_file" label="Select the fragment file."  format="h5" multiple="false" optional="false"/> 
+    </inputs>
+    <outputs>
+        <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS">
+    </outputs>
+    <help><![CDATA[
+        This tool runs the first step in the Signac pipeline, which is to read in the filtered peak BC matrix, the metadata and the fragment file and create a Seurat object.
+    ]]></help>
+    <citations>
+        <citation type="bibtex">
+@misc{renameTODO,
+  author = {LastTODO, FirstTODO},
+  year = {TODO},
+  title = {TODO},
+  url = {https://satijalab.org/signac/articles/pbmc_vignette.html},
+}</citation>
+    </citations>
+</tool>
