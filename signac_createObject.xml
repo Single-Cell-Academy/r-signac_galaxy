@@ -1,7 +1,12 @@
-<tool id="signac_createObject" name="Reads in output files from CellRanger-ATAC and creates a Seurat object containing a ChromatinAssay assay." version="0.1.0" python_template_version="3.5">
+<tool id="signac_createObject" name="CreateObject" version="0.1.0" python_template_version="3.5">
+    <description> reads in output files from CellRanger-ATAC and creates a Seurat object containing a ChromatinAssay assay.</description>
     <macros>
         <import>signac_macros.xml</import>
     </macros>
+    <expand macro="requirements" />
+    <stdio>
+        <exit_code range="1:" />
+        </stdio>
     <command detect_errors="exit_code"><![CDATA[
         r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file $fragment_file
     ]]></command>
