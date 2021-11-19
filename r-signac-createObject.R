@@ -23,14 +23,14 @@ option_list = list(
     action = "store",
     default = NA,
     type = 'character',
-    help = ""
+    help = "Metadata file."
   ),
   make_option(
     c("--genome"),
     action = "store",
     default = NA,
     type = 'character',
-    help = ""
+    help = "Genome version."
   ),
     make_option(
     c("--output-object-file"),
