@@ -12,7 +12,7 @@ suppressPackageStartupMessages(require(workflowscriptscommon))
 
 option_list = list(
   make_option(
-    c("-h", "--h5-file"),
+    c("-f", "--h5-file"),
     action = "store",
     default = NA,
     type = 'character',
