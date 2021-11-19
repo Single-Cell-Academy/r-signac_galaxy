@@ -60,14 +60,15 @@ metadata <- read.csv(
   header = TRUE,
   row.names = 1
 )
+metadata <- subset(metadata,rownames(metadata) %in% colnames(atac_h5_matrix))
 
 chrom_assay <- CreateChromatinAssay(
   counts = atac_h5_matrix,
   sep = c(":", "-"),
   genome = opt$genome,
   fragments = opt$fragment_file,
-  min.cells = 10,
-  min.features = 200
+  min.cells = 0,
+  min.features = 0
 )
 
 signac_object <- CreateSeuratObject(
