@@ -12,35 +12,35 @@ suppressPackageStartupMessages(require(workflowscriptscommon))
 
 option_list = list(
   make_option(
-    c("-f", "--h5-file"),
+    c("--h5-file"),
     action = "store",
     default = NA,
     type = 'character',
     help = "Filtered peak BC matrix file in h5 format."
   ),
   make_option(
-    c("-m", "--metadata"),
+    c("--metadata"),
     action = "store",
     default = NA,
     type = 'character',
     help = ""
   ),
   make_option(
-    c("-g", "--genome"),
+    c("--genome"),
     action = "store",
     default = NA,
     type = 'character',
     help = ""
   ),
     make_option(
-    c("-o", "--output-object-file"),
+    c("--output-object-file"),
     action = "store",
     default = NA,
     type = 'character',
     help = "File name in which to store serialized R matrix object."
   ),
     make_option(
-    c("-f", "--fragment-file"),
+    c("--fragment-file"),
     action = "store",
     default = NA,
     type = 'character',
