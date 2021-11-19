@@ -1,3 +1,4 @@
 [submodule "r-signac_scripts"]
 	path = r-signac_scripts
 	url = https://github.com/Single-Cell-Academy/r-signac_scripts
+	branch = main
