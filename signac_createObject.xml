@@ -1,27 +1,23 @@
 <tool id="signac_createObject" name="CreateObject" version="0.1.0" python_template_version="3.5">
-    <description> reads in output files from CellRanger-ATAC and creates a Seurat object containing a ChromatinAssay assay.</description>
-    <macros>
-        <import>signac_macros.xml</import>
-    </macros>
-    <expand macro="requirements" />
-    <stdio>
-        <exit_code range="1:" />
-    </stdio>
-    <command><![CDATA[
-	    '${__tool_directory__}/r-signac_scripts/r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file $fragment_file --output-object-file $rds_signac_seurat_file
-    ]]></command>
-    <inputs>
-        <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix." format="h5" multiple="false" optional="false"/>
-        <param type="data" name="metadata" label="Select the metadata file." format="csv" multiple="false" optional="false"/> 
-        <param type="text" name="genome" label="Select the respective genome." multiple="false" optional="false"/> 
-        <param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
-        <param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
-    </inputs>
-    <outputs>
-        <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>
-    </outputs>
-    <help><![CDATA[
-        This tool runs the first step in the Signac pipeline, which is to read in the filtered peak BC matrix, the metadata and the fragment file and create a Seurat object.
-    ]]>
-    </help>
+<description> reads in output files from CellRanger-ATAC and creates a Seurat object containing a ChromatinAssay assay.</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<command><![CDATA[
+    Rscript '${__tool_directory__}/r-signac_scripts/r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file $fragment_file --output-object-file $rds_signac_seurat_file
+]]></command>
+<inputs>
+    <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix." format="h5" multiple="false" optional="false"/>
+    <param type="data" name="metadata" label="Select the metadata file." format="csv" multiple="false" optional="false"/> 
+    <param type="text" name="genome" label="Select the respective genome." multiple="false" optional="false"/> 
+    <param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
+    <param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
+</inputs>
+<outputs>
+    <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>
+</outputs>
+<help><![CDATA[
+This tool runs the first step in the Signac pipeline, which is to read in the filtered peak BC matrix, the metadata and the fragment file and create a Seurat object.
+    ]]></help>
 </tool>
