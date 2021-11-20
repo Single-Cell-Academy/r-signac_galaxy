@@ -5,7 +5,7 @@
 </macros>
 <expand macro="requirements"/>
 <command><![CDATA[
-    Rscript '${__tool_directory__}/r-signac_scripts/r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file $fragment_file --output-object-file $rds_signac_seurat_file
+    Rscript '${__tool_directory__}'/r-signac_scripts/r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file $fragment_file --output-object-file $rds_signac_seurat_file
 ]]></command>
 <inputs>
     <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix." format="h5" multiple="false" optional="false"/>
