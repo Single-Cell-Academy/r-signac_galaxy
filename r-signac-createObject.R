@@ -59,7 +59,8 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "Minimum number of features per cell to be retained."
-  ),
+  )
+)
 
 opt <- wsc_parse_args(option_list)
 
