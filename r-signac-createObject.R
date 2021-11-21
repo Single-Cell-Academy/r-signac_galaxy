@@ -45,8 +45,21 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "Fragment file from CellRanger-ATAC."
-  )
-)
+  ),
+    make_option(
+    c("--min-cells"),
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = "Lower number of cells identified per peak."
+  ),
+    make_option(
+    c("--min-features"),
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = "Minimum number of features per cell to be retained."
+  ),
 
 opt <- wsc_parse_args(option_list)
 
@@ -67,8 +80,8 @@ chrom_assay <- CreateChromatinAssay(
   sep = c(":", "-"),
   genome = opt$genome,
   fragments = opt$fragment_file,
-  min.cells = 0,
-  min.features = 0
+  min.cells = opt$min_cells,
+  min.features = opt$min_features
 )
 
 signac_object <- CreateSeuratObject(

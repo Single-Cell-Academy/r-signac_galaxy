@@ -10,12 +10,18 @@
 <command><![CDATA[
     ln -s $fragment_file fragments.tsv.gz &&
     ln -s $fragment_index_file fragments.tsv.gz.tbi &&
-    Rscript '${__tool_directory__}'/r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file fragments.tsv.gz --output-object-file $rds_signac_seurat_file
+    Rscript '${__tool_directory__}'/r-signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file fragments.tsv.gz --output-object-file $rds_signac_seurat_file --min-cells $min_cells --min-features $min_features
 ]]></command>
 <inputs>
     <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix." format="h5" multiple="false" optional="false"/>
     <param type="data" name="metadata" label="Select the metadata file." format="csv" multiple="false" optional="false"/> 
-    <param type="text" name="genome" label="Select the respective genome." multiple="false" optional="false"/> 
+    <param type="select" name="genome" label="Select the respective genome." multiple="false" format="text" optional="false">
+        <option value="hg38">GRCh38/hg38</option>
+        <option value="hg19">GRCh37/hg19</option>
+		<option value="mm10">GRCm38/mm10</option>
+    </param>
+    <param type="integer" name="min_cells" value="10" label="Minimum number of cells features needs to be detected in." multiple="false" optional="false"/> 
+    <param type="integer" name="min_features" value="200" label="Minimum number of features for a cell to be retained." multiple="false" optional="false"/> 
     <param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
     <param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
 </inputs>
