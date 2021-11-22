@@ -1,5 +1,5 @@
-<tool id="signac_createObject" name="CreateObject" version="0.1.0" python_template_version="3.5">
-<description> reads in output files from CellRanger-ATAC and creates a Seurat object containing a ChromatinAssay assay.</description>
+<tool id="signac_add_gene_annotations" name="Add gene annotations" version="0.1.0" python_template_version="3.5">
+<description> to your Signac object.</description>
 <macros>
     <import>signac_macros.xml</import>
 </macros>
@@ -8,7 +8,7 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-add_gene_annotations.R --signac-object $signac_object --ens-db-genome $ens_db_genome --annotations $annotations --output-object-file $rds_signac_seurat_file 
+    Rscript '${__tool_directory__}'/signac-add_gene_annotations.R --signac-object $signac_object --ens-db-genome $ens_db_genome --annotations $annotations --output-object-file $rds_signac_seurat_file --annotations-file $annotations_file
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
@@ -19,8 +19,9 @@
     <param type="select" name="annotations" label="" multiple="false" format="text" optional="false">
         <option value="hg19"></option>
         <option value="GRCh38"></option>
-		<option value="mm10"></option>
+	<option value="mm10"></option>
     </param>
+    <param type="data" name="annotations_file" label="Anno file" format="rdata" multiple="false" optional="false"/>
 </inputs>
 <outputs>
     <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS - genes annotated"/>

@@ -38,6 +38,13 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "File name in which to store serialized R matrix object."
+  ),
+  make_option(
+    c("--annotations-file"),
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = "Annotations file"
   )
 )
 
@@ -45,20 +52,26 @@ opt <- wsc_parse_args(option_list)
 
 suppressPackageStartupMessages(require(Seurat))
 suppressPackageStartupMessages(require(Signac))
-suppressPackageStartupMessages(require(ensdb.hsapiens.v75))
-suppressPackageStartupMessages(require(ensdb.mmusculus.v79))
+suppressPackageStartupMessages(require(GenomeInfoDb))
+suppressPackageStartupMessages(require(EnsDb.Hsapiens.v75))
+suppressPackageStartupMessages(require(EnsDb.Mmusculus.v79))
+
+set.seed(1234)
 
 # extract gene annotations from EnsDb
-signac_object <- opt$signac-object
+sessionInfo()
+signac_object <- readRDS(file = opt$signac_object)
 
-annotations <- GetGRangesFromEnsDb(ensdb = opt$ens_db_genome)
+annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75)
 
 # change to UCSC style since the data was mapped to hg19
 seqlevelsStyle(annotations) <- 'UCSC'
-genome(annotations) <- opt$annotations
+genome(annotations) <- "GRCh38"
+
+saveRDS(annotations, file = opt$output_object_file)
 
 # add the gene information to the object
-Annotation(signac_object) <- annotations
+#Annotation(signac_object) <- annotations
 
 # Output to a serialized R object
-saveRDS(signac_object, file = opt$output_object_file)
+#saveRDS(signac_object, file = opt$output_object_file)
