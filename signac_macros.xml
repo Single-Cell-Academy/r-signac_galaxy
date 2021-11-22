@@ -10,8 +10,10 @@
             <requirement type="package" version="1.5_12.2">r-cairo</requirement>
             <requirement type="package" version="1.3.5">r-hdf5r</requirement>
             <requirement type="package" version="0.0.7">r-workflowscriptscommon</requirement>
+            <requirement type="package" version="1.42.0">bioconductor-biovizbase</requirement>
+            <requirement type="package" version="2.99.0">bioconductor-ensdb.hsapiens.v75</requirement>
+            <requirement type="package" version="2.99.0">bioconda bioconductor-ensdb.mmusculus.v79</requirement>
             <requirement type="package" version="@SIGNAC_VERSION@">r-signac</requirement>
         </requirements>
     </xml>
-
 </macros>
