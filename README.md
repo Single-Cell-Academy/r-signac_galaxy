@@ -10,10 +10,12 @@ GenAP2 CellRanger-ATAC: https://github.com/Single-Cell-Academy/genap2_cellranger
 
 # External sites
 Original Signac project: https://github.com/timoast/signac
-Signac vignettess for R: https://satijalab.org/signac/articles/pbmc_vignette.html
+
+Signac vignettes for R: https://satijalab.org/signac/articles/pbmc_vignette.html
 
 # Additional information
 Due to the related nature of Seurat and Signac, the structure and organization of the Galaxy and R code in this repo is attempting to follow similar principles established by the EBI single-cell tools. 
+
 Some of the code for running Rscripts via the command line have been directly copied over from their repositories which can be found here:
 r-seurat-scripts: https://github.com/ebi-gene-expression-group/r-seurat-scripts/blob/develop/seurat-read.R
 Seurat galaxy wrappers: https://github.com/ebi-gene-expression-group/container-galaxy-sc-tertiary/tree/develop/tools/tertiary-analysis/seurat
