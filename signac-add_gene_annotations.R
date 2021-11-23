@@ -38,7 +38,7 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "File name in which to store serialized R matrix object."
-  ), 
+  ) 
 )
 
 opt <- wsc_parse_args(option_list)
