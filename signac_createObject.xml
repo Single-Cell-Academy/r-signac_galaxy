@@ -16,7 +16,7 @@
     <param type="data" name="h5_file" label="Select the h5 file containing the filtered peak BC matrix." format="h5" multiple="false" optional="false"/>
     <param type="data" name="metadata" label="Select the metadata file." format="csv" multiple="false" optional="false"/> 
     <param type="select" name="genome" label="Select the respective genome." multiple="false" format="text" optional="false">
-        <option value="hg38">GRCh38/hg38</option>
+        <option value="GRCh38">GRCh38/hg38</option>
         <option value="hg19">GRCh37/hg19</option>
 		<option value="mm10">GRCm38/mm10</option>
     </param>
