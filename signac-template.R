@@ -16,21 +16,21 @@ option_list = list(
     action = "store",
     default = NA,
     type = 'character',
-    help = "Filtered peak BC matrix file in h5 format."
+    help = ""
   ),
   make_option(
-    c("--ens-db-genome"),
+    c("--"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "Metadata file."
+    help = "."
   ),
   make_option(
-    c("--annotations"),
+    c("--"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "Genome version."
+    help = "."
   ),
   make_option(
     c("--output-object-file"),
@@ -54,14 +54,7 @@ set.seed(1234)
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)
 
-annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75)
 
-# change to UCSC style since the data was mapped to hg19
-seqlevelsStyle(annotations) <- 'UCSC'
-genome(annotations) <- opt$annotations
-
-# add the gene information to the object
-Annotation(signac_object) <- annotations
 
 # Output to a serialized R object
 saveRDS(signac_object, file = opt$output_object_file)
