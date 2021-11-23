@@ -12,8 +12,9 @@
             <requirement type="package" version="1.42.0">bioconductor-biovizbase</requirement>
             <requirement type="package" version="2.99.0">bioconductor-ensdb.hsapiens.v75</requirement>
 	    <requirement type="package" version="2.99.0">bioconductor-ensdb.mmusculus.v79</requirement>
+            <requirement type="package" version="1.30.0">bioconductor-genomeinfodb</requirement>
 	    <requirement type="package" version="@SIGNAC_VERSION@">r-signac</requirement>
-	    <requirement type="package" version="1.30.0">bioconductor-genomeinfodb</requirement>
+            <requirement type="package" version="4.0.2">r-seuratobject</requirement>
         </requirements>
     </xml>
 </macros>

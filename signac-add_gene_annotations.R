@@ -38,14 +38,7 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "File name in which to store serialized R matrix object."
-  ),
-  make_option(
-    c("--annotations-file"),
-    action = "store",
-    default = NA,
-    type = 'character',
-    help = "Annotations file"
-  )
+  ), 
 )
 
 opt <- wsc_parse_args(option_list)
@@ -66,7 +59,7 @@ annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75)
 
 # change to UCSC style since the data was mapped to hg19
 seqlevelsStyle(annotations) <- 'UCSC'
-genome(annotations) <- "GRCh38"
+genome(annotations) <- opt$annotations
 
 # add the gene information to the object
 Annotation(signac_object) <- annotations
