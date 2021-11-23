@@ -68,10 +68,8 @@ annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75)
 seqlevelsStyle(annotations) <- 'UCSC'
 genome(annotations) <- "GRCh38"
 
-saveRDS(annotations, file = opt$output_object_file)
-
 # add the gene information to the object
-#Annotation(signac_object) <- annotations
+Annotation(signac_object) <- annotations
 
 # Output to a serialized R object
-#saveRDS(signac_object, file = opt$output_object_file)
+saveRDS(signac_object, file = opt$output_object_file)
