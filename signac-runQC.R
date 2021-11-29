@@ -26,18 +26,25 @@ option_list = list(
     help = "TSS enrichment threshold for marking regions as high tss regions."
   ),
   make_option(
-    c("--output_tss_plot"),
+    c("--output-tss-plot"),
     action = "store",
     default = NA,
     type = 'character',
     help = "TSS output plot."
   ),
   make_option(
-    c("--frag_history_plot"),
+    c("--frag-history-plot"),
     action = "store",
     default = NA,
     type = 'character',
     help = "Fragment length periodicity plot."
+  ),
+  make_option(
+    c("--fragment-file"),
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = "Fragment file."
   ),
   make_option(
     c("--output-object-file"),
