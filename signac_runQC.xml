@@ -10,13 +10,23 @@
 <command><![CDATA[
     ln -s $fragment_file ./fragments.tsv.gz &&
     ln -s $fragment_index_file fragments.tsv.gz.tbi &&
-    Rscript '${__tool_directory__}'/signac-runQC.R --signac-object $signac_object --fragment-file fragments.tsv.gz --tss-threshold $tss_threshold --output-object-file $rds_signac_seurat_file --output-tss-plot $output_tss_plot --frag-history-plot $frag_history_plot 
+    Rscript '${__tool_directory__}'/signac-runQC.R 
+    --signac-object $signac_object 
+    --fragment-file fragments.tsv.gz 
+    --tss-threshold $tss_threshold 
+    --output-object-file $rds_signac_seurat_file 
+    --output-tss-plot $output_tss_plot 
+    --frag-history-plot $frag_history_plot 
+    --png-width $png_width
+    --png-height $png_height
 ]]></command>
 <inputs>
 	<param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
 	<param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
 	<param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
-        <param type="integer" name="tss_threshold" value="2" label=" Transcription start site (TSS) enrichment score threshold for considering cells with a high TSS enrichment for the TSS plot." multiple="false" optional="false"/> 
+    <param type="integer" name="tss_threshold" value="2" label=" Transcription start site (TSS) enrichment score threshold for considering cells with a high TSS enrichment for the TSS plot." multiple="false" optional="false"/> 
+    <param type="integer" name="png_width" value='1000' label="Figure width" help='Width of png in pixels.' />
+    <param type="integer" name="png_height" value='1000' label="Figure height" help='Height of png in pixels.'/>
 </inputs>
 <outputs>
 	<data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>

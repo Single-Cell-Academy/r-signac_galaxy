@@ -47,6 +47,20 @@ option_list = list(
     help = "Fragment file."
   ),
   make_option(
+    c("-w", "--png-width"),
+    action = "store",
+    default = 1000,
+    type = 'integer',
+    help = "Width of png (px)."
+  ),
+  make_option(
+    c("-j", "--png-height"),
+    action = "store",
+    default = 1000,
+    type = 'integer',
+    help = "Height of png file (px)."
+  ),
+  make_option(
     c("--output-object-file"),
     action = "store",
     default = NA,
@@ -85,13 +99,13 @@ signac_object$blacklist_ratio <- signac_object$blacklist_region_fragments / sign
 
 signac_object$high.tss <- ifelse(signac_object$TSS.enrichment > opt$tss_threshold, 'High', 'Low')
 
-png(filename = opt$output_tss_plot)
+png(filename = opt$output_tss_plot, width = opt$png_width, height = opt$png_height)
 TSSPlot(signac_object, group.by = 'high.tss') + NoLegend()
 dev.off()
 
 signac_object$nucleosome_group <- ifelse(signac_object$nucleosome_signal > 4, 'NS > 4', 'NS < 4')
 
-png(filename = opt$frag_history_plot)
+png(filename = opt$frag_history_plot, width = opt$png_width, height = opt$png_height)
 FragmentHistogram(object = signac_object, group.by = 'nucleosome_group')
 dev.off()
 
