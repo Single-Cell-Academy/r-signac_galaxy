@@ -8,8 +8,8 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    cp $fragment_file fragments.tsv.gz &&
-    cp $fragment_index_file fragments.tsv.gz.tbi &&
+    ln -s $fragment_file fragments.tsv.gz &&
+    ln -s $fragment_index_file fragments.tsv.gz.tbi &&
     Rscript '${__tool_directory__}'/signac-createObject.R --h5-file $h5_file --metadata $metadata --genome $genome --fragment-file fragments.tsv.gz --output-object-file $rds_signac_seurat_file --min-cells $min_cells --min-features $min_features
 ]]></command>
 <inputs>

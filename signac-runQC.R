@@ -19,7 +19,7 @@ option_list = list(
     help = ""
   ),
   make_option(
-    c("--tss_threshold"),
+    c("--tss-threshold"),
     action = "store",
     default = NA,
     type = 'character',
@@ -68,6 +68,11 @@ set.seed(1234)
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)
 
+## Modify fragments file location
+current_wd <- getwd()
+new_framgent_file_loc <- paste(current_wd,"fragments.tsv.gz",sep = "/")
+signac_object@assays$peaks@fragments[[1]]@path <- new_framgent_file_loc
+
 # compute nucleosome signal score per cell
 signac_object <- NucleosomeSignal(object = signac_object)
 
@@ -75,10 +80,10 @@ signac_object <- NucleosomeSignal(object = signac_object)
 signac_object <- TSSEnrichment(object = signac_object, fast = FALSE)
 
 # add blacklist ratio and fraction of reads in peaks
-signac_object$pct_reads_in_peaks <- signac_object$peak_region_fragments / pbmc$passed_filters * 100
-signac_object$blacklist_ratio <- signac_object$blacklist_region_fragments / pbmc$peak_region_fragments
+signac_object$pct_reads_in_peaks <- signac_object$peak_region_fragments / signac_object$passed_filters * 100
+signac_object$blacklist_ratio <- signac_object$blacklist_region_fragments / signac_object$peak_region_fragments
 
-signac_object$high.tss <- ifelse(signac_object$TSS.enrichment > tss_threshold, 'High', 'Low')
+signac_object$high.tss <- ifelse(signac_object$TSS.enrichment > opt$tss_threshold, 'High', 'Low')
 
 png(filename = opt$output_tss_plot)
 TSSPlot(signac_object, group.by = 'high.tss') + NoLegend()
