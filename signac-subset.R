@@ -76,20 +76,29 @@ suppressPackageStartupMessages(require(Signac))
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)
 
+
+## transform input parameters to numeric
+peak_region_fragments_min <- as.numeric(opt$peak_region_fragments_min)
+peak_region_fragments_max <- as.numeric(opt$peak_region_fragments_max)
+pct_reads_in_peaks_var <- as.numeric(opt$pct_reads_in_peaks)
+blacklist_ratio_var <- as.numeric(opt$blacklist_ratio)
+nucleosome_signal_var <- as.numeric(opt$nucleosome_signal)
+tss_enrichment_var <- as.numeric(opt$tss_enrichment)
+
+print("Signac object before filtering:")
+
 signac_object
 
-signac_object <- subset(signac_object, peak_region_fragments > opt$peak_region_fragments_min)
+signac_object <- subset(signac_object, peak_region_fragments > peak_region_fragments_min)
+signac_object <- subset(signac_object, peak_region_fragments < peak_region_fragments_max)
+signac_object <- subset(signac_object, pct_reads_in_peaks > pct_reads_in_peaks_var)
+signac_object <- subset(signac_object, blacklist_ratio < blacklist_ratio_var)
+signac_object <- subset(signac_object, nucleosome_signal < nucleosome_signal_var)
+signac_object <- subset(signac_object, TSS.enrichment > tss_enrichment_var)
 
-print("First subset")
-signac_object <- subset(signac_object, peak_region_fragments < opt$peak_region_fragments_max)
-print("peak_region")
-#signac_object <- subset(signac_object, pct_reads_in_peaks > opt$pct_reads_in_peaks)
-print("pct")
-#signac_object <- subset(signac_object, blacklist_ratio < opt$blacklist_ratio)
-print("blacklist")
-#signac_object <- subset(signac_object, nucleosome_signal < opt$nucleosome_signal)
-print("nucleosome")
-#signac_object <- subset(signac_object, TSS.enrichment > opt$tss_enrichment)
+print("Signac object after filtering:")
+
+signac_object
 
 # Output to a serialized R object
 saveRDS(signac_object, file = opt$output_object_file)
