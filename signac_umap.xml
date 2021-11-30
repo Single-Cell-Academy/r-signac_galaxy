@@ -1,0 +1,23 @@
+<tool id="signac_umap" name="Calculate UMAP" version="0.1.0" python_template_version="3.5">
+<description> embedding of scATAC-seq data.</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+    Rscript '${__tool_directory__}'/signac-umap.R --signac-object $signac_object --reduction $reduction_use --dims-use 2,30 --output-object-file $rds_signac_seurat_file 
+]]></command>
+<inputs>
+    <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
+    <param type="text" name="reduction_use" value='lsi' label="Dimensional reduction to use for UMAP (default:lsi)." help='Which dimensional reduction (PCA or ICA) to use for the UMAP input.'/>
+</inputs>
+<outputs>
+    <data name="rds_signac_seurat_file" format="rdata" label="Signac Object RDS (UMAP)"/>
+</outputs>
+<help><![CDATA[
+This tool runs the second step in the Signac pipeline, which will add gene annotations to the Signac object.
+    ]]></help>
+</tool>
