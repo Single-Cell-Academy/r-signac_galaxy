@@ -43,14 +43,16 @@ option_list = list(
 
 opt <- wsc_parse_args(option_list)
 
-dims_use <- opt$dims_use
-if ( ! is.null(dims_use)){
-  dims_use <- as.integer(wsc_parse_numeric(opt, 'dims_use'))
-}
-
+suppressPackageStartupMessages(require(Seurat))
 suppressPackageStartupMessages(require(Signac))
 
 set.seed(1234)
+
+dims_use <- opt$dims_use
+if ( ! is.null(dims_use)){
+  dims_parsed <- wsc_parse_numeric(opt, 'dims_use')
+  dims_use <- seq(from = dims_parsed[1], to = dims_parsed[2])
+}
 
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)

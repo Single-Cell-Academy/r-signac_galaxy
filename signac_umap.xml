@@ -8,11 +8,12 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-umap.R --signac-object $signac_object --reduction $reduction_use --dims-use 2,30 --output-object-file $rds_signac_seurat_file 
+    Rscript '${__tool_directory__}'/signac-umap.R --signac-object $signac_object --reduction $reduction_use --dims-use $dims_use --output-object-file $rds_signac_seurat_file 
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
     <param type="text" name="reduction_use" value='lsi' label="Dimensional reduction to use for UMAP (default:lsi)." help='Which dimensional reduction (PCA or ICA) to use for the UMAP input.'/>
+    <param type="text" name="dims_use" value='2,30' label="Dimensional reduction to use for UMAP (default:lsi)." help='How many dimensions to use for UMAP.'/>
 </inputs>
 <outputs>
     <data name="rds_signac_seurat_file" format="rdata" label="Signac Object RDS (UMAP)"/>
