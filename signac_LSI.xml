@@ -1,0 +1,26 @@
+<tool id="signac_lsi" name="Latent semantic indexing (LSI)" version="0.1.0" python_template_version="3.5">
+<description> pferofrms normalization and linear dimensional reduction (TF-IDF followed by SVD).</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+    Rscript '${__tool_directory__}'/signac-LSI.R --signac-object $signac_object --min-cutoff $min_cutoff --png-width $png_width --png-height $png_height --output-depthcor $output_depthcor_plot --output-object-file $rds_signac_seurat_file
+]]></command>
+<inputs>
+	<param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>	
+	<param type="text" name="min_cutoff" value='q0' label="Variable features cutoff to use." help='Cutoff for feature to be included in the VariableFeatures for the object.'/>
+	<param type="integer" name="png_width" value='1000' label="Figure width" help='Width of png in pixels.'/>
+	<param type="integer" name="png_height" value='1000' label="Figure height" help='Height of png in pixels.'/>
+</inputs>
+<outputs>
+	<data name="rds_signac_seurat_file" format="rdata" label="Signac Object RDS (LSI)"/>
+	<data name="output_depthcor_plot" format="png" from_work_dir="Signac.Depthcor_plot.png" label="Signac.Depthcor_plot.png"/>
+</outputs>
+<help><![CDATA[
+This tool runs the second step in the Signac pipeline, which will add gene annotations to the Signac object.
+    ]]></help>
+</tool>
