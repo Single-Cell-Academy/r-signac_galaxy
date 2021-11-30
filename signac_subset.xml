@@ -22,9 +22,9 @@
     <param type="integer" name="peak_region_fragments_min" value='3000' label="Peak region format minimum. (>X)" help=''/>
     <param type="integer" name="peak_region_fragments_max" value='20000' label="Peak region format maximum (<X)." help=''/>
     <param type="integer" name="pct_reads_in_peaks" value='15' label="Minimum percent of reads in peaks (>X)." help=''/>
-    <param type="integer" name="blacklist_ratio" value='0.05' label="Blacklist ratio (<X)." help=''/>
+    <param type="float" name="blacklist_ratio" value='0.05' label="Blacklist ratio (<X)." help=''/>
     <param type="integer" name="nucleosome_signal" value='4' label="Nucleosome signal threshold (<X)." help=''/>
-    <param type="integer" name="TSS_enrichment" value='2' label="TSS enrichment signal threshold (>X)." help='' />
+    <param type="integer" name="TSS_enrichment" value='2' label="TSS enrichment signal threshold (>X)." help=''/>
 </inputs>
 <outputs>
     <data name="rds_signac_seurat_file" format="rdata" label="Signac RDS (subset)"/>

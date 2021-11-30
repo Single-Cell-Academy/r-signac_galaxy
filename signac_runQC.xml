@@ -25,7 +25,7 @@
 	<param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
 	<param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
     <param type="integer" name="tss_threshold" value="2" label=" Transcription start site (TSS) enrichment score threshold for considering cells with a high TSS enrichment for the TSS plot." multiple="false" optional="false"/> 
-    <param type="integer" name="png_width" value='1000' label="Figure width" help='Width of png in pixels.' />
+    <param type="integer" name="png_width" value='1000' label="Figure width" help='Width of png in pixels.'/>
     <param type="integer" name="png_height" value='1000' label="Figure height" help='Height of png in pixels.'/>
 </inputs>
 <outputs>
