@@ -9,16 +9,8 @@
 </stdio>
 <command><![CDATA[
     ln -s $fragment_file ./fragments.tsv.gz &&
-    ln -s $fragment_index_file fragments.tsv.gz.tbi &&
-    Rscript '${__tool_directory__}'/signac-runQC.R 
-    --signac-object $signac_object 
-    --fragment-file fragments.tsv.gz 
-    --tss-threshold $tss_threshold 
-    --output-object-file $rds_signac_seurat_file 
-    --output-tss-plot $output_tss_plot 
-    --frag-history-plot $frag_history_plot 
-    --png-width $png_width
-    --png-height $png_height
+ln -s $fragment_index_file fragments.tsv.gz.tbi &&
+    Rscript '${__tool_directory__}'/signac-runQC.R --signac-object $signac_object --fragment-file fragments.tsv.gz --tss-threshold $tss_threshold --output-object-file $rds_signac_seurat_file --output-tss-plot $output_tss_plot --frag-history-plot $frag_history_plot --png-width $png_width --png-height $png_height
 ]]></command>
 <inputs>
 	<param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>

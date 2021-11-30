@@ -8,14 +8,7 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-subset.R --signac-object $signac_object 
-    --peak-region-fragments-min $peak_region_fragments_min 
-    --peak-region-fragments-max $peak_region_fragments_max 
-    --pct-reads-in-peaks $pct_reads_in_peaks 
-    --blacklist-ratio $blacklist_ratio
-    --nucleosome-signal $nucleosome_signal
-    --TSS-enrichment $TSS_enrichment
-    --output-object-file $rds_signac_seurat_file
+    Rscript '${__tool_directory__}'/signac-subset.R --signac-object $signac_object --peak-region-fragments-min $peak_region_fragments_min --peak-region-fragments-max $peak_region_fragments_max --pct-reads-in-peaks $pct_reads_in_peaks --blacklist-ratio $blacklist_ratio --nucleosome-signal $nucleosome_signal --TSS-enrichment $TSS_enrichment --output-object-file $rds_signac_seurat_file
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
