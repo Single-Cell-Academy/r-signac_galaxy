@@ -1,0 +1,35 @@
+<tool id="signac_subset" name="Subset" version="0.1.0" python_template_version="3.5">
+<description> a Signac object based on user defined thresholds.</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+    Rscript '${__tool_directory__}'/signac-subset.R --signac-object $signac_object 
+    --peak-region-fragments-min $peak_region_fragments_min 
+    --peak-region-fragments-max $peak_region_fragments_max 
+    --pct-reads-in-peaks $pct_reads_in_peaks 
+    --blacklist-ratio $blacklist_ratio
+    --nucleosome-signal $nucleosome_signal
+    --TSS-enrichment $TSS_enrichment
+    --output-object-file $rds_signac_seurat_file
+]]></command>
+<inputs>
+    <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
+    <param type="integer" name="peak_region_fragments_min" value='3000' label="Peak region format minimum. (>X)" help=''/>
+    <param type="integer" name="peak_region_fragments_max" value='20000' label="Peak region format maximum (<X)." help=''/>
+    <param type="integer" name="pct_reads_in_peaks" value='15' label="Minimum percent of reads in peaks (>X)." help=''/>
+    <param type="integer" name="blacklist_ratio" value='0.05' label="Blacklist ratio (<X)." help=''/>
+    <param type="integer" name="nucleosome_signal" value='4' label="Nucleosome signal threshold (<X)." help=''/>
+    <param type="integer" name="TSS_enrichment" value='2' label="TSS enrichment signal threshold (>X)." help='' />
+</inputs>
+<outputs>
+    <data name="rds_signac_seurat_file" format="rdata" label="Signac RDS (subset)"/>
+</outputs>
+<help><![CDATA[
+This tool runs the second step in the Signac pipeline, which will add gene annotations to the Signac object.
+    ]]></help>
+</tool>
