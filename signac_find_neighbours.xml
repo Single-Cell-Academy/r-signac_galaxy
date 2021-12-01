@@ -1,5 +1,5 @@
-<tool id="signac_" name="Bold text here" version="0.1.0" python_template_version="3.5">
-<description> details for tool here.</description>
+<tool id="signac_find_neighbours" name="Find neighbours" version="0.1.0" python_template_version="3.5">
+<description>using the k-nearest neighbour algorithm.</description>
 <macros>
     <import>signac_macros.xml</import>
 </macros>
@@ -8,7 +8,7 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-.R --signac-object $signac_object --reduction $reduction_use --dims-use $dims_use --output-object-file $rds_signac_seurat_file
+    Rscript '${__tool_directory__}'/signac-find_neighbours.R --signac-object $signac_object --reduction $reduction_use --dims-use $dims_use --output-object-file $rds_signac_seurat_file
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
