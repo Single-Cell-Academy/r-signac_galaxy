@@ -101,9 +101,6 @@ opt <- wsc_parse_args(option_list)
 
 suppressPackageStartupMessages(require(Seurat))
 suppressPackageStartupMessages(require(Signac))
-suppressPackageStartupMessages(require(GenomeInfoDb))
-suppressPackageStartupMessages(require(EnsDb.Hsapiens.v75))
-suppressPackageStartupMessages(require(EnsDb.Mmusculus.v79))
 
 set.seed(1234)
 

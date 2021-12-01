@@ -1,5 +1,5 @@
-<tool id="signac_" name="Bold text here" version="0.1.0" python_template_version="3.5">
-<description> details for tool here.</description>
+<tool id="signac_umap" name="Plot dimensional reduction" version="0.1.0" python_template_version="3.5">
+<description> of your cell embeddings.</description>
 <macros>
     <import>signac_macros.xml</import>
 </macros>
@@ -8,7 +8,7 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-.R --signac-object $signac_object --dim-1 $dim_1 --dim-2 $dim_2 --pt-size $pt_size --label-size $label_size --do-label $do_label --group-by $group_by --plot-title $plot_title --do-bare $do_bare --png-width $png_width --png-height $png_height --output_image_file $dimplot_file
+    Rscript '${__tool_directory__}'/signac-dimplot.R --signac-object $signac_object --dim-1 $dim_1 --dim-2 $dim_2 --pt-size $pt_size --label-size $label_size --do-label $do_label --group-by $group_by --plot-title $plot_title --do-bare $do_bare --png-width $png_width --png-height $png_height --output_image_file $dimplot_file
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
