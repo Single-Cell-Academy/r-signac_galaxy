@@ -8,7 +8,7 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-find_neighbours.R --signac-object $signac_object --algorithm $algorithm_use --output-object-file $rds_signac_seurat_file
+    Rscript '${__tool_directory__}'/signac-find_clusters.R --signac-object $signac_object --algorithm $algorithm_use --output-object-file $rds_signac_seurat_file
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>

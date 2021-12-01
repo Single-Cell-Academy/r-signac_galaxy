@@ -57,7 +57,7 @@ if ( ! is.null(dims_use)){
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)
 
-FindNeighbors(object = signac_object, reduction = opt$reduction_use, dims = dims_use)
+signac_object <- FindNeighbors(object = signac_object, reduction = opt$reduction_use, dims = dims_use)
 
 # Output to a serialized R object
 saveRDS(signac_object, file = opt$output_object_file)
