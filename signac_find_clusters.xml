@@ -1,0 +1,23 @@
+<tool id="signac_find_clusters" name="Identify clusters" version="0.1.0" python_template_version="3.5">
+<description>of cells by a shared nearest neighbor (SNN) modularity optimization based clustering algorithm.</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+    Rscript '${__tool_directory__}'/signac-find_clusters.R --signac-object $signac_object --algorithm $algorithm_use --output-object-file $rds_signac_seurat_file
+]]></command>
+<inputs>
+    <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
+    <param type="integer" name="algorithm_use" value='3' label="Algorithm." help='Algorithm for modularity optimization (1 = original Louvain algorithm; 2 = Louvain algorithm with multilevel refinement; 3 = SLM algorithm; 4 = Leiden algorithm).'/>
+</inputs>
+<outputs>
+    <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>
+</outputs>
+<help><![CDATA[
+This tool runs the FindClusters step in the Signac workflow.
+    ]]></help>
+</tool>
