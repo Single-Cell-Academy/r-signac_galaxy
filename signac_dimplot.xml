@@ -1,0 +1,28 @@
+<tool id="signac_dimplot" name="Plot dimensional reduction" version="0.1.0" python_template_version="3.5">
+<description> of your cell embeddings.</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:"/>
+</stdio>
+<command><![CDATA[
+    Rscript '${__tool_directory__}'/signac-dimplot.R --signac-object $signac_object --dims $dims --pt-size $pt_size --label-size $label_size --group-by $group_by --png-width $png_width --png-height $png_height --output_image_file $dimplot_file
+]]></command>
+<inputs>
+    <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
+    <param type="text" name="dims" value='1,2' label="Dimensions to use." help='Dimension to use.'/>
+    <param type="float" name="pt_size" value='1' label="Point size" help='Adjust point size for plotting'/>
+    <param type="float" name="label_size" value='4' label="Label size" help='Sets size of labels'/>
+    <param type="text" name="group_by" value='ident' label='Group by' help='Group (color) cells in different ways'/>
+    <param type="integer" name="png_width" value='1000' label="Figure width" help='Width of png in pixels.'/>
+    <param type="integer" name="png_height" value='1000' label="Figure height" help='Height of png in pixels.'/>
+</inputs>
+<outputs>
+    <data name="dimplot_file" format="png" from_work_dir="Dimplot.png" label="Signac.dimplot.png"/>
+</outputs>
+<help><![CDATA[
+This tool runs the second step in the Signac pipeline, which will add gene annotations to the Signac object.
+    ]]></help>
+</tool>
