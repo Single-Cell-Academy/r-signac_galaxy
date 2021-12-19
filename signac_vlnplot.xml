@@ -1,0 +1,42 @@
+<tool id="signac_vlnplot" name="Violin Plot" version="0.1.0" python_template_version="3.5">
+<description> of selected features.</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:"/>
+</stdio>
+<command><![CDATA[
+    Rscript '${__tool_directory__}'/signac-vlnplot.R --signac-object $signac_object --features $features --pt-size $pt_size --group-by $group_by --sort $sort --assay $assay --same-y-lims $same_y_lims --log $log --ncol $ncol --slot $slot --stack $stack --fill-by $fill_by --flip $flip --png-width $png_width --png-height $png_height --output_image_file $vlnplot_file
+]]></command>
+<inputs>
+    <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
+    <param type="data" name="features" label="Features" format="txt" multiple="false" optional="false"/>
+    <param type="text" name="cols" label="Colours" format="txt" multiple="false" optional="true"/>
+    <param type="float" name="pt_size" value='1' label="Point size" optional="true"/>
+    <param type="text" name="group_by" value='ident' label="Group by"/>
+    <param type="boolean" name="sort" value='false' label="Sort"/>
+    <param type="text" name="assay" value='RNA' label="Assay"/>
+    <!-- <param type="text" name="split_by" value='NULL' label="A split the violin plots by"/> -->
+    <param type="boolean" name="same_y_lims" value='false' label="Same y limits"/>
+    <param type="boolean" name="log" value='false' label="Plot on log scale"/>
+    <param type="integer" name="ncol" value='3' label="Number of columns"/>
+    <param type="text" name="slot" value='data' label="Data slot"/>
+    <!-- <param type="boolean" name="split_plot" value='false' label="Plot each group of the split violin plots by multiple or single violin shapes"/> -->
+    <param type="boolean" name="stack" value='false' label="Horizontally stack plots for each feature"/>
+    <param type="select" name="fill_by" label="Color violins/ridges based on either 'feature' or 'ident'">
+        <option value="feature">feature</option>
+        <option value="ident">ident</option>
+    </param>
+    <param type="boolean" name="flip" value='false' label="flip plot orientation (identities on x-axis)"/> 
+    <param type="integer" name="png_width" value='1000' label="Figure width" help='Width of png in pixels.'/>
+    <param type="integer" name="png_height" value='1000' label="Figure height" help='Height of png in pixels.'/>
+</inputs>
+<outputs>
+    <data name="vlnplot_file" format="png" from_work_dir="Vlnplot.png" label="Signac.vlnplot.png"/>
+</outputs>
+<help><![CDATA[
+This tool creates a violin plot and saves it as a .png file.
+    ]]></help>
+</tool>
