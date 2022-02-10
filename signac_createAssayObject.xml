@@ -8,13 +8,12 @@
     <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-createAssayObject.R --signac-object $signac_object --counts $counts --data $data --name $name --min-cells $min_cells --min-features $min_features --method $method --scale-factor $scale_factor --margin $margin --output-object-file $rds_signac_seurat_file 
+    Rscript '${__tool_directory__}'/signac-createAssayObject.R --signac-object $signac_object --counts $counts --name $name --min-cells $min_cells --min-features $min_features --method $method --scale-factor $scale_factor --margin $margin --output-object-file $rds_signac_seurat_file 
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
-    <param type="data" name="counts" label="Counts Matrix." format="csv" multiple="false" optional="true"/>
-    <param type="data" name="data" label="Data Matrix." format="csv" multiple="false" optional="true"/>
-    <param type="text" name="name" label="Assay Name." multiple="false" optional="true" value="NewAssay"/>    
+    <param type="data" name="counts" label="Counts Matrix (Output of Gene Activity)" format="rdata" multiple="false" optional="true"/>
+    <param type="text" name="name" label="Assay Name." multiple="false" optional="true" value="RNA"/>    
     <param type="integer" name="min_cells" label="Min Cells." multiple="false" optional="false" value="0"/>
     <param type="integer" name="min_features" label="Min Features." multiple="false" optional="false" value="0"/>
     <param type="select" name="method" label="Method for normalization." value="LogNormalize">

@@ -18,6 +18,13 @@ option_list = list(
     help = "A Seurat object."
   ),
   make_option(
+    c("--fragment-file"),
+    action = "store",
+    default = NA,
+    type = 'character',
+    help = "Fragments file."
+  ),
+  make_option(
     c("--assay"),
     action = "store",
     default = NULL,
@@ -79,6 +86,10 @@ if (! file.exists(opt$signac_object)){
   stop((paste('File', opt$signac_object, 'does not exist')))
 }
 
+signac_object <- readRDS(file = opt$signac_object)
+
+signac_object@assays$peaks@fragments[[1]]@path <- opt$fragment_file
+
 # Check features
 features <- NULL
 if (! is.null(opt$features) && opt$features != 'NULL'){
@@ -87,12 +98,10 @@ if (! is.null(opt$features) && opt$features != 'NULL'){
   }
 }
 
-signac_object <- readRDS(file = opt$signac_object)
-
-assay <- if(is.null(opt$assay)){
-  DefaultAssay(signac_object)
-}else{
-  opt$assay
+# Check assay
+assay <- NULL
+if (! is.null(opt$assay) && opt$assay != 'NULL'){
+  assay <- opt$assay
 }
 
 saveRDS(GeneActivity(object = signac_object, assay = assay, features = features, extend.upstream = opt$extend_upstream, extend.downstream = opt$extend_downstream, biotypes = opt$biotypes, max.width = opt$max_width), file = opt$output_object_file)

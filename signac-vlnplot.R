@@ -176,6 +176,12 @@ if (! is.null(opt$cols) && opt$cols != 'NULL'){
   }
 }
 
+# Check assay
+assay <- NULL
+if (! is.null(opt$assay) && opt$assay != 'NULL'){
+  assay <- opt$assay
+}
+
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)
 
@@ -198,7 +204,7 @@ VlnPlot(object = signac_object,
   pt.size = opt$pt_size, 
   group.by = group_by,
   sort = opt$sort,
-  assay = opt$assay, 
+  assay = assay, 
   #split.by = opt$split_by,
   same.y.lims = opt$same_y_lims, 
   log = opt$log, 

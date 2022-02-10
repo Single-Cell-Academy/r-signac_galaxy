@@ -25,13 +25,6 @@ option_list = list(
     help = "Counts Matrix."
   ),
   make_option(
-    c("--data"),
-    action = "store",
-    default = NA,
-    type = 'character',
-    help = "Data Matrix."
-  ),
-  make_option(
     c("--name"),
     action = "store",
     default = NA,
@@ -106,11 +99,7 @@ if(!is.null(opt$counts)){
 
 signac_object <- readRDS(file = opt$signac_object)
 
-if(!is.null(opt$counts)){
-    signac_object[[opt$name]] <- CreateAssayObject(counts = read.csv(opt$counts, header = T, row.names = 1), min.cells = opt$min_cells, min.features = opt$min_features)
-}else{
-    signac_object[[opt$name]] <- CreateAssayObject(data = read.csv(opt$data, header = T, row.names = 1), min.cells = opt$min_cells, min.features = opt$min_features)
-}
-signac_object <- NormalizeData(object = signac_object, normalization.method = opt$method, scale.factor = opt$scale_factor, margin = opt$margin, assay = opt$name)
+signac_object[[opt$name]] <- CreateAssayObject(counts = readRDS(opt$counts), min.cells = opt$min_cells, min.features = opt$min_features)
+ac_object <- NormalizeData(object = signac_object, normalization.method = opt$method, scale.factor = opt$scale_factor, margin = opt$margin, assay = opt$name)
 
 saveRDS(signac_object, file = opt$output_object_file)
