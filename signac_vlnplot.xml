@@ -8,16 +8,16 @@
     <exit_code range="1:"/>
 </stdio>
 <command><![CDATA[
-    Rscript '${__tool_directory__}'/signac-vlnplot.R --signac-object $signac_object --features $features --pt-size $pt_size --group-by $group_by --sort $sort --assay $assay --same-y-lims $same_y_lims --log $log --ncol $ncol --slot $slot --stack $stack --fill-by $fill_by --flip $flip --png-width $png_width --png-height $png_height --output_image_file $vlnplot_file
+    Rscript '${__tool_directory__}'/signac-vlnplot.R --signac-object $signac_object --features $features --cols $cols --pt-size $pt_size --group-by $group_by --sort $sort --assay $assay --same-y-lims $same_y_lims --log $log --ncol $ncol --slot $slot --stack $stack --fill-by $fill_by --flip $flip --png-width $png_width --png-height $png_height --output_image_file $vlnplot_file
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
     <param type="data" name="features" label="Features" format="txt" multiple="false" optional="false"/>
-    <param type="text" name="cols" label="Colours" format="txt" multiple="false" optional="true"/>
+    <param type="text" name="cols" label="Colours" value="NULL" format="txt" multiple="false" optional="false"/>
     <param type="float" name="pt_size" value='1' label="Point size" optional="true"/>
     <param type="text" name="group_by" value='ident' label="Group by"/>
     <param type="boolean" name="sort" value='false' label="Sort"/>
-    <param type="text" name="assay" value='RNA' label="Assay"/>
+    <param type="text" name="assay" value='NULL' format="txt" label="Assay"/>
     <!-- <param type="text" name="split_by" value='NULL' label="A split the violin plots by"/> -->
     <param type="boolean" name="same_y_lims" value='false' label="Same y limits"/>
     <param type="boolean" name="log" value='false' label="Plot on log scale"/>

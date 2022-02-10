@@ -39,7 +39,7 @@ option_list = list(
     type = 'character',
     help = "File name in which to store serialized R matrix object."
   ),
-    make_option(
+  make_option(
     c("--fragment-file"),
     action = "store",
     default = NA,
@@ -74,7 +74,6 @@ metadata <- read.csv(
   header = TRUE,
   row.names = 1
 )
-metadata <- subset(metadata,rownames(metadata) %in% colnames(atac_h5_matrix))
 
 chrom_assay <- CreateChromatinAssay(
   counts = atac_h5_matrix,
@@ -84,6 +83,8 @@ chrom_assay <- CreateChromatinAssay(
   min.cells = opt$min_cells,
   min.features = opt$min_features
 )
+
+metadata <- subset(metadata,rownames(metadata) %in% colnames(chrom_assay))
 
 signac_object <- CreateSeuratObject(
   counts = chrom_assay,

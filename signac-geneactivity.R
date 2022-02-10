@@ -18,53 +18,53 @@ option_list = list(
     help = "A Seurat object."
   ),
   make_option(
-    c("--counts"),
+    c("--fragment-file"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "Counts Matrix."
+    help = "Fragments file."
   ),
   make_option(
-    c("--name"),
+    c("--assay"),
+    action = "store",
+    default = NULL,
+    type = 'character',
+    help = "Assay."
+  ),
+  make_option(
+    c("--features"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "Assay Name."
+    help = "Features."
   ),
   make_option(
-    c("--min-cells"),
+    c("--extend-upstream"),
     action = "store",
     default = NA,
     type = 'numeric',
-    help = "Min Cells."
+    help = "Number of bases to extend upstream of the TSS."
   ),
   make_option(
-    c("--min-features"),
+    c("--extend-downstream"),
     action = "store",
     default = NA,
     type = 'numeric',
-    help = "Min Features."
+    help = "Number of bases to extend downstream of the TSS."
   ),
   make_option(
-    c("--method"),
+    c("--biotypes"),
     action = "store",
     default = NA,
     type = 'character',
-    help = "Method for normalization."
+    help = "Gene biotypes to include. If NULL, use all biotypes in the gene annotation."
   ),
   make_option(
-    c("--scale-factor"),
+    c("--max-width"),
     action = "store",
-    default = 10000,
+    default = NA,
     type = 'numeric',
-    help = "Sets the scale factor for cell-level normalization."
-  ),
-  make_option(
-    c("--margin"),
-    action = "store",
-    default = NA,
-    type = 'character',
-    help = "If performing CLR normalization, normalize across features (1) or cells (2)."
+    help = "Maximum allowed gene width for a gene to be quantified."
   ),
   make_option(
     c("--output-object-file"),
@@ -85,21 +85,23 @@ set.seed(1234)
 if (! file.exists(opt$signac_object)){
   stop((paste('File', opt$signac_object, 'does not exist')))
 }
-if(!is.null(opt$counts)){
-  if (! file.exists(opt$counts)){
-    stop((paste('File', opt$data, 'does not exist')))
-  }
-}else if(!is.null(opt$data)){
-  if (! file.exists(opt$data)){
-    stop((paste('File', opt$data, 'does not exist')))
-  }
-}else{
-  stop(paste("A 'counts' or 'data' file must be supplied."))
-}
 
 signac_object <- readRDS(file = opt$signac_object)
 
-signac_object[[opt$name]] <- CreateAssayObject(counts = readRDS(opt$counts), min.cells = opt$min_cells, min.features = opt$min_features)
-ac_object <- NormalizeData(object = signac_object, normalization.method = opt$method, scale.factor = opt$scale_factor, margin = opt$margin, assay = opt$name)
+signac_object@assays$peaks@fragments[[1]]@path <- opt$fragment_file
 
-saveRDS(signac_object, file = opt$output_object_file)
+# Check features
+features <- NULL
+if (! is.null(opt$features) && opt$features != 'NULL'){
+  if (file.exists(opt$features)){
+    features <- readLines(opt$features)
+  }
+}
+
+# Check assay
+assay <- NULL
+if (! is.null(opt$assay) && opt$assay != 'NULL'){
+  assay <- opt$assay
+}
+
+saveRDS(GeneActivity(object = signac_object, assay = assay, features = features, extend.upstream = opt$extend_upstream, extend.downstream = opt$extend_downstream, biotypes = opt$biotypes, max.width = opt$max_width), file = opt$output_object_file)

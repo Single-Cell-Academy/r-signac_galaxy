@@ -1,0 +1,32 @@
+<tool id="signac_geneactivity" name="Gene Activity" version="0.1.0" python_template_version="3.5">
+<description>Create gene activity matrix</description>
+<macros>
+    <import>signac_macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<stdio>
+    <exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+    ln -s $fragment_file fragments.tsv.gz &&
+    ln -s $fragment_index_file fragments.tsv.gz.tbi &&
+    Rscript '${__tool_directory__}'/signac-geneactivity.R --signac-object $signac_object --fragment-file fragments.tsv.gz --assay $assay --features $features --extend-upstream $extend_upstream --extend-downstream $extend_downstream --biotypes $biotypes --max-width $max_width --output-object-file $rds_sparse_matrix 
+]]></command>
+<inputs>
+    <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
+    <param type="data" name="fragment_file" label="Select the fragment file."  format="bgzip" multiple="false" optional="false"/>
+    <param type="data" name="fragment_index_file" label="Select the fragment index file." format="text" multiple="false" optional="false"/>
+    <param type="text" name="assay" format="txt" value="NULL" label="Name of assay to use. If blank, use the default assay." multiple="false" optional="true"/>
+    <param type="data" name="features" label="Features (If NULL, use all features)" format="txt" multiple="false" optional="true"/>
+    <param type="integer" name="extend_upstream" label="Number of bases to extend upstream of the TSS" multiple="false" optional="false" value="2000"/>
+    <param type="integer" name="extend_downstream" label="Number of bases to extend downstream of the TSS" multiple="false" optional="false" value="0"/>
+    <param type="text" name="biotypes" label="Gene biotypes to include. If NULL, use all biotypes in the gene annotation" multiple="false" optional="false" value="protein_coding"/>
+    <param type="integer" name="max_width" label="Maximum allowed gene width for a gene to be quantified" multiple="false" optional="false" value="500000"/>
+</inputs>
+<outputs>
+    <data name="rds_sparse_matrix" format="rdata" label="Sparse Matrix (Gene Activity)"/>
+</outputs>
+<help><![CDATA[
+Compute counts per cell in gene body and promoter region.
+    ]]></help>
+</tool>
