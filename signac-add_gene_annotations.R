@@ -31,6 +31,20 @@ option_list = list(
     default = NA,
     type = 'character',
     help = "Genome version."
+    ),
+  make_option(
+    c("--std_chrom"),
+    action = "store",
+    default = TRUE,
+    type = 'logical',
+    help = "Keep only standard chromosomes."
+  ),
+   make_option(
+    c("--biotypes"),
+    action = "store",
+    default = NULL,
+    type = 'character',
+    help = "Comma separated list of biotypes to use."
   ),
   make_option(
     c("--output-object-file"),
@@ -51,10 +65,21 @@ suppressPackageStartupMessages(require(EnsDb.Mmusculus.v79))
 
 set.seed(1234)
 
+## parsing logic taken from EBI gene expression github r-seurat-scripts
+## parse biotypes
+biotypes_use<-NULL
+if (! is.null(opt$biotypes) ) {
+	biotypes_use <- c("protein_coding", "lincRNA", "rRNA", "processed_transcript")
+}else{
+	biotypes_use <- wsc_split_string(opt$biotypes)
+}
+
 # extract gene annotations from EnsDb
 signac_object <- readRDS(file = opt$signac_object)
 
-annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75)
+annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75,
+				   standard.chromosomes = opt$std_chrom,
+				   biotypes = biotypes_use)
 
 # change to UCSC style since the data was mapped to hg19
 seqlevelsStyle(annotations) <- 'UCSC'
