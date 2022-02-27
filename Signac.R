@@ -27,7 +27,7 @@ metadata <- metadata[colnames(counts),]
 chrom_assay <- CreateChromatinAssay(
   counts = counts,
   sep = c(":", "-"),
-  genome = 'GRCh38',
+  genome = 'hg19',
   fragments = './atac_v1_pbmc_10k_fragments.tsv.gz',
   min.cells = 10,
   min.features = 200
