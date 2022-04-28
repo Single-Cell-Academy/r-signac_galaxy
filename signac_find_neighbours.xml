@@ -12,13 +12,13 @@
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
-    <param type="text" name="reduction_use" value='lsi' label="Dimensional reduction to use for UMAP (default:lsi)." help='Which dimensional reduction (PCA or ICA) to use for the UMAP input.'/>
-    <param type="text" name="dims_use" value='2,30' label="Dimensional reduction to use for UMAP (default:lsi)." help='How many dimensions to use for UMAP.'/>
+    <param type="text" name="reduction_use" value='lsi' label="Dimensional reduction to use for Find neighbours (default:lsi)." help='Which dimensional reduction (PCA or ICA) to use for the Find neighbours input.'/>
+    <param type="text" name="dims_use" value='2,30' label="Dimensional reduction to use for Find neighbours (default:lsi)." help='How many dimensions to use for Find neighbours.'/>
 </inputs>
 <outputs>
     <data name="rds_signac_seurat_file" format="rdata" label="${tool.name} on ${on_string}: Signac RDS"/>
 </outputs>
 <help><![CDATA[
-This tool runs the second step in the Signac pipeline, which will add gene annotations to the Signac object.
+This tool runs the Find neighbours function in the Signac pipeline.
     ]]></help>
 </tool>

@@ -68,30 +68,35 @@ suppressPackageStartupMessages(require(Seurat))
 suppressPackageStartupMessages(require(Signac))
 
 atac_h5_matrix <- Read10X_h5(filename = opt$h5_file)
+print(paste("counts:",dim(atac_h5_matrix)))
 
 metadata <- read.csv(
   file = opt$metadata,
   header = TRUE,
   row.names = 1
 )
+print(paste("metadata:",dim(metadata)))
 
 chrom_assay <- CreateChromatinAssay(
   counts = atac_h5_matrix,
   sep = c(":", "-"),
   genome = opt$genome,
   fragments = opt$fragment_file,
-  min.cells = opt$min_cells,
-  min.features = opt$min_features
+  min.cells = as.numeric(opt$min_cells),
+  min.features = as.numeric(opt$min_features)
 )
+print(chrom_assay)
 
-metadata <- subset(metadata,rownames(metadata) %in% colnames(chrom_assay))
+#metadata <- subset(metadata,rownames(metadata) %in% colnames(chrom_assay))
 
 signac_object <- CreateSeuratObject(
   counts = chrom_assay,
   assay = "peaks",
   meta.data = metadata
 )
-
+print(signac_object)
+print(signac_object[['peaks']])
+print(granges(signac_object))
 # cat(c(
 #   '# Object summary', 
 #   capture.output(print(signac_object)), 
@@ -101,4 +106,5 @@ signac_object <- CreateSeuratObject(
 # sep = '\n')
 
 # Output to a serialized R object
+
 saveRDS(signac_object, file = opt$output_object_file)

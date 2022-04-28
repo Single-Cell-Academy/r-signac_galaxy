@@ -159,11 +159,7 @@ if (! file.exists(opt$signac_object)){
 # Check features
 features <- NULL
 if (! is.null(opt$features) && opt$features != 'NULL'){
-  if (! file.exists(opt$features)){
-    stop((paste('Supplied features file', opt$features, 'does not exist')))
-  }else{
-    features <- readLines(opt$features)
-  }
+  features <- strsplit(opt$features, ",")[[1]]
 }
 
 # Check cols
@@ -200,7 +196,7 @@ group_by <- if(opt$group_by == 'ident'){
 png(filename = opt$output_image_file, width = opt$png_width, height = opt$png_height)
 VlnPlot(object = signac_object, 
   features = features, 
-  cols = opt$cols, 
+  cols = cols, 
   pt.size = opt$pt_size, 
   group.by = group_by,
   sort = opt$sort,

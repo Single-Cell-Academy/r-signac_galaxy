@@ -70,11 +70,10 @@ option_list = list(
     c("--output-object-file"),
     action = "store",
     default = NA,
-    type = 'character',
+    type = 'numeric',
     help = "File name in which to store serialized R matrix object."
   ) 
 )
-
 opt <- wsc_parse_args(option_list)
 
 suppressPackageStartupMessages(require(Seurat))
@@ -85,21 +84,15 @@ set.seed(1234)
 if (! file.exists(opt$signac_object)){
   stop((paste('File', opt$signac_object, 'does not exist')))
 }
-if(!is.null(opt$counts)){
-  if (! file.exists(opt$counts)){
-    stop((paste('File', opt$data, 'does not exist')))
-  }
-}else if(!is.null(opt$data)){
-  if (! file.exists(opt$data)){
-    stop((paste('File', opt$data, 'does not exist')))
-  }
-}else{
-  stop(paste("A 'counts' or 'data' file must be supplied."))
+if (! file.exists(opt$counts)){
+  stop((paste('File', opt$counts, 'does not exist')))
 }
 
 signac_object <- readRDS(file = opt$signac_object)
+counts <- readRDS(opt$counts)
 
-signac_object[[opt$name]] <- CreateAssayObject(counts = readRDS(opt$counts), min.cells = opt$min_cells, min.features = opt$min_features)
-ac_object <- NormalizeData(object = signac_object, normalization.method = opt$method, scale.factor = opt$scale_factor, margin = opt$margin, assay = opt$name)
+signac_object[[opt$name]] <- CreateAssayObject(counts = counts)#, min.cells = opt$min_cells, min.features = opt$min_features)
+
+signac_object <- NormalizeData(object = signac_object, normalization.method = opt$method, scale.factor = opt$scale_factor, margin = opt$margin, assay = opt$name)
 
 saveRDS(signac_object, file = opt$output_object_file)

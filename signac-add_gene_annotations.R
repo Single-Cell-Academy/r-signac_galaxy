@@ -55,13 +55,16 @@ set.seed(1234)
 signac_object <- readRDS(file = opt$signac_object)
 
 annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v75)
+print(annotations)
 
 # change to UCSC style since the data was mapped to hg19
-seqlevelsStyle(annotations) <- 'UCSC'
+seqlevelsStyle(annotations) <- "UCSC"
 genome(annotations) <- opt$annotations
 
 # add the gene information to the object
 Annotation(signac_object) <- annotations
+
+print(signac_object)
 
 # Output to a serialized R object
 saveRDS(signac_object, file = opt$output_object_file)

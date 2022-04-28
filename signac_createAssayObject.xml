@@ -28,7 +28,7 @@
     </param>
 </inputs>
 <outputs>
-    <data name="rds_signac_seurat_file" format="rdata" label="Signac Object RDS (Normalize)"/>
+    <data name="rds_signac_seurat_file" format="rdata" label="Signac Object RDS (Create Assay Object - Normalized)"/>
 </outputs>
 <help><![CDATA[
 This tool creates a new assay and runs the NormalizeData function.

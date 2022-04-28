@@ -83,9 +83,14 @@ set.seed(1234)
 signac_object <- readRDS(file = opt$signac_object)
 
 ## Modify fragments file location
-current_wd <- getwd()
-new_framgent_file_loc <- paste(current_wd,"fragments.tsv.gz",sep = "/")
-signac_object@assays$peaks@fragments[[1]]@path <- new_framgent_file_loc
+# current_wd <- getwd()
+# new_framgent_file_loc <- paste(current_wd,"fragments.tsv.gz",sep = "/")
+# signac_object@assays$peaks@fragments[[1]]@path <- new_framgent_file_loc
+# signac_object@assays$peaks@fragments[[1]]@path <- opt$fragment_file
+#print(normalizePath(path = paste0(opt$fragment_file, '.tbi'), mustWork = TRUE))
+#system(paste0("mv ", paste0(opt$fragment_file, '.tbi'), ' ', normalizePath(path = paste0(opt$fragment_file, '.tbi'), mustWork = TRUE)))
+# The error was that the fragment file and fragment index file were not being imported into galaxy properly. They should be imported as tabluar.gz
+signac_object@assays$peaks@fragments[[1]] <- UpdatePath(signac_object@assays$peaks@fragments[[1]], opt$fragment_file)
 
 # compute nucleosome signal score per cell
 signac_object <- NucleosomeSignal(object = signac_object)
@@ -97,7 +102,7 @@ signac_object <- TSSEnrichment(object = signac_object, fast = FALSE)
 signac_object$pct_reads_in_peaks <- signac_object$peak_region_fragments / signac_object$passed_filters * 100
 signac_object$blacklist_ratio <- signac_object$blacklist_region_fragments / signac_object$peak_region_fragments
 
-signac_object$high.tss <- ifelse(signac_object$TSS.enrichment > opt$tss_threshold, 'High', 'Low')
+signac_object$high.tss <- ifelse(signac_object$TSS.enrichment > as.numeric(opt$tss_threshold), 'High', 'Low')
 
 png(filename = opt$output_tss_plot, width = opt$png_width, height = opt$png_height)
 TSSPlot(signac_object, group.by = 'high.tss') + NoLegend()
@@ -108,6 +113,8 @@ signac_object$nucleosome_group <- ifelse(signac_object$nucleosome_signal > 4, 'N
 png(filename = opt$frag_history_plot, width = opt$png_width, height = opt$png_height)
 FragmentHistogram(object = signac_object, group.by = 'nucleosome_group')
 dev.off()
+
+print(summary(signac_object@meta.data))
 
 # Output to a serialized R object
 saveRDS(signac_object, file = opt$output_object_file)

@@ -12,7 +12,7 @@
 ]]></command>
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
-    <param type="data" name="features" label="Features" format="txt" multiple="false" optional="false"/>
+    <param type="text" name="features" label="Features (separated by a comma)" optional="false"/>
     <param type="text" name="cols" label="Colours" value="NULL" format="txt" multiple="false" optional="false"/>
     <param type="float" name="pt_size" value='1' label="Point size" optional="true"/>
     <param type="text" name="group_by" value='ident' label="Group by"/>

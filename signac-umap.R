@@ -51,6 +51,7 @@ set.seed(1234)
 dims_use <- opt$dims_use
 if ( ! is.null(dims_use)){
   dims_parsed <- wsc_parse_numeric(opt, 'dims_use')
+  print(str(dims_parsed))
   dims_use <- seq(from = dims_parsed[1], to = dims_parsed[2])
 }
 
