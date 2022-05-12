@@ -11,13 +11,13 @@ library(future)
 plan("multicore", workers = (availableCores()-1))
 options(future.globals.maxSize = 3000000 * 1024^2)
 
-setwd("/home/gaelcge/projects/def-jsjoyal/gaelcge/scATACseq/10XData/atac_pbmc_500_nextgem_output/outs")
+setwd("/home/gaelcge/projects/def-jsjoyal/gaelcge/scATACseq/10XData/atac_v1_pbmc_10k_output/")
 
-counts <- Read10X_h5(filename = "./filtered_peak_bc_matrix.h5")
+counts <- Read10X_h5(filename = "./atac_v1_pbmc_10k_filtered_peak_bc_matrix.h5")
 
 
 metadata <- read.csv(
-  file = "./singlecell.csv",
+  file = "./atac_v1_pbmc_10k_singlecell.csv",
   header = TRUE,
   row.names = 1
 )
@@ -27,8 +27,8 @@ metadata <- metadata[colnames(counts),]
 chrom_assay <- CreateChromatinAssay(
   counts = counts,
   sep = c(":", "-"),
-  genome = 'GRCh38',
-  fragments = './fragments.tsv.gz',
+  genome = 'hg19',
+  fragments = './atac_v1_pbmc_10k_fragments.tsv.gz',
   min.cells = 10,
   min.features = 200
 )
