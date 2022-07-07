@@ -17,9 +17,9 @@
         <option value="EnsDb.Mmusculus.v79"></option>
     </param>
     <param type="select" name="annotations" label="" multiple="false" format="text" optional="false">
-	<option value="GRCh38"></option>
-        <option value="hg19"></option>
-	<option value="mm10"></option>
+	<option value="GRCh38">GRCh38</option>
+        <option value="hg19">hg19</option>
+	<option value="mm10">mm10</option>
     </param>
 </inputs>
 <outputs>
