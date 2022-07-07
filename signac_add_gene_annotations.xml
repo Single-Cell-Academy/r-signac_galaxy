@@ -13,8 +13,8 @@
 <inputs>
     <param type="data" name="signac_object" label="Signac object." format="rdata" multiple="false" optional="false"/>
     <param type="select" name="ens_db_genome" label="EnsDB genome version" multiple="false" format="text" optional="false">
-        <option value="EnsDb.Hsapiens.v75"></option>
-        <option value="EnsDb.Mmusculus.v79"></option>
+        <option value="EnsDb.Hsapiens.v75">EnsDb.Hsapiens.v75</option>
+        <option value="EnsDb.Mmusculus.v79">EnsDb.Mmusculus.v79</option>
     </param>
     <param type="select" name="annotations" label="" multiple="false" format="text" optional="false">
 	<option value="GRCh38">GRCh38</option>
